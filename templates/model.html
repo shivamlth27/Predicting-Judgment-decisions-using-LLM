@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishi.ai</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50; /* Dark Slate Blue */
+            --secondary-color: #e67e22; /* Carrot Orange */
+            --accent-color: #16a085; /* Turquoise */
+            --background-color: #f9f9f9; /* Light Gray */
+            --text-color: #34495e; /* Slate Gray */
+            --card-background: #ffffff; /* White */
+            --header-border-color: #2ecc71; /* Emerald Green */
+            --conclusion-background: #8e44ad; /* Amethyst */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 1rem 0;
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        nav .logo img {
+            max-height: 50px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid var(--header-border-color);
+            padding-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .card {
+            background-color: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--secondary-color);
+        }
+
+        .conclusion {
+            background-color: var(--conclusion-background);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .conclusion h2 {
+            color: white;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='img/pro.png') }}" alt="Krishi.ai Logo">
+            </div>
+            <a href="/">HOME</a>
+            <a href="/model">MODEL</a>
+            <a href="/dataset">DATASET</a>
+            <a href="/find">CHECK FOR NEW DATA</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>DFN-PSAN Architecture with PSA</h1>
+        
+        <p>The <span class="highlight">DFN-PSAN</span> (Deep Fusion Network with Pyramid Squeeze Attention Network) architecture is an improvement of <span class="highlight">YOLOv5</span>, designed for more accurate plant disease detection. It focuses on enhanced feature extraction and classification through the use of <span class="highlight">Pyramid Squeeze Attention (PSA)</span>, which boosts the model's ability to focus on important features in plant images.</p>
+
+        <h2>Key Components</h2>
+
+        <div class="card">
+            <h3>1. YOLOv5 for Feature Extraction</h3>
+            <p>YOLOv5, a real-time object detection model, handles feature extraction. While YOLOv5n offers speed and low weight, it lacks deep feature extraction capability. To address this, DFN-PSAN introduces modifications to improve feature extraction, fusion, and convergence speed.</p>
+        </div>
+
+        <div class="card">
+            <h3>2. YOLOv5 Architecture</h3>
+            <ul>
+                <li><strong>Backbone:</strong> Utilizes CSPDarkNet with a 6 × 6 convolutional layer replacing the older Focus structure.</li>
+                <li><strong>SPP Module:</strong> Expands the receptive field, extracting both local and global features through max-pooling at various scales. The operation can be represented as:
+                    \[
+                    \text{SPP}(FM) = \text{Concat}(\text{MaxPool}(FM, k_1), \text{MaxPool}(FM, k_2), \text{MaxPool}(FM, k_3))
+                    \]
+                    where \( FM \) is the input feature map and \( k_i \) are the pooling kernel sizes.</li>
+            </ul>
+            <img src="{{ url_for('static', filename='img/DFN-PSAN_architecture.png') }}" alt="DFN-PSAN_architecture">
+        </div>
+
+        <div class="card">
+            <h3>3. Neck (DFN)</h3>
+            <p>The Neck combines the Feature Pyramid Network (FPN) and Path Aggregation Network (PAN). The FPN upscales feature maps from lower levels to capture high-level semantic information, while the PAN downscales feature maps from higher levels to improve localization accuracy. This can be described mathematically as:
+                \[
+                \text{FPN}(x) = \text{Upsample}(x) + \text{SkipConnection}(x)
+                \]
+                \[
+                \text{PAN}(x) = \text{Downsample}(x) + \text{SkipConnection}(x)
+                \]
+                where \( x \) represents the feature maps at various levels of the network.</p>
+        </div>
+
+        <div class="card">
+            <h3>4. PSAN Classification Layer</h3>
+            <p>The PSAN classification layer replaces YOLOv5's Head to enhance classification performance. The Pyramid Squeeze Attention mechanism refines the focus on important features using:
+                \[
+                \text{PSA}(FM) = \text{GAP}(\text{Attention}(FM))
+                \]
+                where \(\text{GAP}\) represents Global Average Pooling and \(\text{Attention}\) denotes the attention mechanism applied to the feature map \( FM \).</p>
+        </div>
+
+        <div class="dataset-info">
+            <h3>5. Feature Fusion and Attention</h3>
+            <p>The Neck structure integrates features from various layers, improving the network’s ability to handle objects at different scales. The attention mechanism, which can be expressed as:
+                \[
+                \text{Attention}(FM) = \sigma(W \cdot FM + b)
+                \]
+                where \( \sigma \) is the activation function, \( W \) is the weight matrix, and \( b \) is the bias, enhances the focus on relevant features. Classification is performed using the Softmax function:
+                \[
+                \text{Softmax}(x_i) = \frac{e^{x_i}}{\sum_j e^{x_j}}
+                \]
+                which converts the output logits into probabilities for each class.</p>
+        </div>
+
+        <div class="card">
+            <h3>6. Training</h3>
+            <p>Training involves updating the model parameters using a deep neural network with 30 hyperparameters. The optimization process minimizes the cross-entropy loss function with label smoothing, which can be expressed as:</p>
+            <p>
+                \[
+                \text{Loss} = -\sum_{i=1}^N \left(y_i \log(p_i) \right)
+                \]
+            </p>
+            <p>where \( N \) is the total number of categories, \( y_i \) is the prediction result for category \( i \), \( p_i \) is the confidence score of the network output for category \( i \), and \( \epsilon \) is the label smoothing hyperparameter. Label smoothing modifies \( y_i \) as follows:</p>
+            <p>
+                \[
+                y_i = 
+                \begin{cases} 
+                1 - \epsilon & \text{if } i \text{ is the target category} \\
+                \frac{\epsilon}{N} & \text{if } i \text{ is not the target category}
+                \end{cases}
+                \]
+            </p>
+            <p>The loss function with label smoothing helps improve the model's generalization by preventing it from becoming too confident about its predictions.</p>
+        </div>
+        
+
+        <div class="conclusion">
+            <h2>Conclusion</h2>
+            <p>The DFN-PSAN architecture, through its enhancements and mathematical formulations, achieves superior plant disease detection by integrating advanced feature extraction, attention mechanisms, and effective classification methods.</p>
+        </div>
+        
+    </div>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="img/pro.png" alt="Krishi.ai Logo">
+                    <img src="static/img/pro.png" alt="Krishi.ai Logo">
+                    <p>Intelligent Plant Disease Recognition</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">IIT BHILAI</a>
+                    <a href="#">Krishi.ai</a>
+                </div>
+                <div class="footer-contact">
+                    <p>Phone: 9310808926</p>
+                    <p>Address: IIT BHILAI</p>
+                    <p>Email: ayushkum@iitbhilai.ac.in</p>
+                </div>
+            </div>
+            <p class="copyright">Copyright © All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishi.ai - Intelligent Plant Disease Recognition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <style>
+        /* body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        } */
+        .container1 {
+            max-width: 800px;
+            height: 679px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            margin-top: 100px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="file"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='img/pro.png') }}" alt="Krishi.ai Logo">
+            </div>
+            <a href="/">HOME</a>
+            <a href="/model">MODEL</a>
+            <a href="/dataset">DATASET</a>
+            <a href="/find">CHECK FOR NEW DATA</a>
+        </nav>
+    </header>
+
+    <div class="container1">
+        <h1>Upload New Data</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Select an image or file:</label>
+                <input type="file" id="file" name="file" accept="image/*,.pdf,.doc,.docx" required>
+            </div>
+            <button type="submit">Upload File</button>
+        </form>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="static/img/pro.png" alt="Krishi.ai Logo">
+                    <p>Intelligent Plant Disease Recognition</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#">IIT BHILAI</a>
+                    <a href="#">Krishi.ai</a>
+                </div>
+                <div class="footer-contact">
+                    <p>Phone: 9310808926</p>
+                    <p>Address: IIT BHILAI</p>
+                    <p>Email: ayushkum@iitbhilai.ac.in</p>
+                </div>
+            </div>
+            <p class="copyright">Copyright © All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>
+</body>
+</html>
