@@ -94,12 +94,10 @@ By introducing **PredEx**, an expert-annotated dataset tailored to Indian judici
 
 ### Binary Classification Results
 
-| **Model**         | **Precision** | **Recall** | **Macro F1** |
-|-------------------|--------------|-----------|-------------|
-| **RoBERTa**       | 85.7%       | 93.9%     | 83.3%       |
-| **Legal-BERT**    | 86.3%       | 90.0%     | 81.8%       |
-| **HIER-BERT**     | 91.3%       | 80.5%     | **83.3%**   |
-| **aLEXa-BERT**    | **91.1%**   | **80.6%** | **83.4%**   |
+![Validation](https://github.com/user-attachments/assets/dfe00b8f-df17-4f43-8890-6249ebbf6206)
+
+
+![WhatsApp Image 2024-11-25 at 10 40 34_7348b125](https://github.com/user-attachments/assets/20a57296-71b6-42c6-ac23-0c6cf8b30d03)
 
 ### Explainability Example
 
@@ -180,10 +178,16 @@ Special thanks to:
 
 ## 📚 **References**
 
-1. Chalkidis et al., "Neural Legal Judgment Prediction in English," 2019.
-2. Nallapati & Manning, "Legal Docket Classification," 2008.
-3. [spaCy Library for NLP](https://spacy.io)
+1. Here's how you can include the link to your paper in the README:
 
 ---
 
-Feel free to suggest additions or provide example images for placeholders!
+## 📚 **Research Paper**
+
+This project is based on the research detailed in our paper:
+
+1. **[From RoBERTa to aLEXa: Automated Legal Expert Arbitrator for Neural Legal Judgment Prediction](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1224/reports/custom_116826881.pdf)**
+
+2. **[Legal Judgment Reimagined: PredEx and the Rise of Intelligent AI Interpretation in Indian Courts](https://arxiv.org/abs/2406.04136)**  
+   This paper introduces the PredEx dataset and emphasizes the use of explainable AI techniques in the Indian judicial system.
+
