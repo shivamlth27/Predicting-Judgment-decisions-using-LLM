@@ -73,15 +73,18 @@ def prepare_data(df, tokenizer, instruction_templates, max_length=512):
     
     return encodings, labels
 
+from tqdm import tqdm  # Import tqdm for progress bars
+
 def train_epoch(model, dataloader, optimizer, scheduler, device):
     """
-    Training for one epoch with instruction-based inputs
+    Training for one epoch with instruction-based inputs, with a progress bar
     """
     model.train()
     total_loss = 0
     epoch_start = time.time()
     
-    for step, batch in enumerate(dataloader):
+    # Add a progress bar for the training loop
+    for step, batch in enumerate(tqdm(dataloader, desc="Training")):
         batch_input_ids = batch[0].to(device)
         batch_attention_mask = batch[1].to(device)
         batch_labels = batch[2].to(device)
@@ -102,23 +105,20 @@ def train_epoch(model, dataloader, optimizer, scheduler, device):
         optimizer.step()
         scheduler.step()
         
-        if step % 40 == 0:
-            elapsed = time.time() - epoch_start
-            print(f'Batch {step}/{len(dataloader)} - Loss: {loss.item():.4f} - Time: {elapsed:.2f}s')
-            
     avg_loss = total_loss / len(dataloader)
     return avg_loss
 
 def evaluate(model, dataloader, device):
     """
-    Evaluate the model
+    Evaluate the model with a progress bar
     """
     model.eval()
     predictions = []
     true_labels = []
     
+    # Add a progress bar for the evaluation loop
     with torch.no_grad():
-        for batch in dataloader:
+        for batch in tqdm(dataloader, desc="Evaluating"):
             batch_input_ids = batch[0].to(device)
             batch_attention_mask = batch[1].to(device)
             batch_labels = batch[2].to(device)
@@ -141,12 +141,12 @@ def main():
     
     # Load data and instructions
     train_df = pd.read_csv('datasets/train.csv')
-    train_df= train_df.head(100)
+    # train_df = train_df.head(100)  # Smaller subset for testing
     instruction_templates = load_instructions()
     print(f"Training examples: {len(train_df)}")
     print(f"Loaded {len(instruction_templates)} instruction templates")
     
-    # Initialize tokenizer and model with instruction-specific configuration
+    # Initialize tokenizer and model
     model_name = 'roberta-base'
     tokenizer = RobertaTokenizer.from_pretrained(model_name)
     
@@ -156,24 +156,16 @@ def main():
     }
     tokenizer.add_special_tokens(special_tokens)
     
-    # Initialize model with updated config
-    config = RobertaConfig.from_pretrained(
-        model_name,
-        num_labels=2,
-        hidden_dropout_prob=0.1,
-        attention_probs_dropout_prob=0.1
-    )
-    
     model = RobertaForSequenceClassification.from_pretrained(
         model_name,
-        config=config
+        num_labels=2
     )
     
     # Resize token embeddings for new special tokens
     model.resize_token_embeddings(len(tokenizer))
     model.to(device)
     
-    # Prepare training data with dynamic instructions
+    # Prepare training data
     train_encodings, train_labels = prepare_data(train_df, tokenizer, instruction_templates)
     
     # Create dataset and dataloader
@@ -182,8 +174,7 @@ def main():
         train_encodings['attention_mask'],
         train_labels
     )
-    
-    batch_size = 8  # Smaller batch size for instruction fine-tuning
+    batch_size = 8
     train_dataloader = DataLoader(
         train_dataset,
         sampler=RandomSampler(train_dataset),
@@ -193,12 +184,10 @@ def main():
     # Training parameters
     epochs = 2
     total_steps = len(train_dataloader) * epochs
-    
-    # Initialize optimizer and scheduler
     optimizer = AdamW(model.parameters(), lr=1e-5)
     scheduler = get_linear_schedule_with_warmup(
         optimizer,
-        num_warmup_steps=total_steps//10,
+        num_warmup_steps=total_steps // 10,
         num_training_steps=total_steps
     )
     
@@ -207,9 +196,9 @@ def main():
     best_loss = float('inf')
     
     for epoch in range(epochs):
-        print(f'\nEpoch {epoch+1}/{epochs}')
+        print(f'\nEpoch {epoch + 1}/{epochs}')
         
-        # For each epoch, create new training data with different random instructions
+        # Re-prepare data with dynamic instructions
         train_encodings, train_labels = prepare_data(train_df, tokenizer, instruction_templates)
         train_dataset = TensorDataset(
             train_encodings['input_ids'],
@@ -222,6 +211,7 @@ def main():
             batch_size=batch_size
         )
         
+        # Train and evaluate
         avg_loss = train_epoch(
             model=model,
             dataloader=train_dataloader,
@@ -229,10 +219,8 @@ def main():
             scheduler=scheduler,
             device=device
         )
-        
         print(f'Average loss: {avg_loss:.4f}')
         
-        # Save best model
         if avg_loss < best_loss:
             best_loss = avg_loss
             output_dir = "saved_models/roberta_instruction/"
@@ -242,13 +230,11 @@ def main():
             tokenizer.save_pretrained(output_dir)
             print(f"Saved best model to {output_dir}")
         
-        # Evaluate on training data
         predictions, true_labels = evaluate(
             model=model,
             dataloader=train_dataloader,
             device=device
         )
-        
         print("\nTraining Metrics:")
         print(classification_report(true_labels, predictions))
 
