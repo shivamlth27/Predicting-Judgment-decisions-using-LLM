@@ -112,8 +112,8 @@ Ensure you have the following installed:
 ### Steps to Run the Project
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-repo/judgment-llm.git
+   ```bash 
+   git clone https://github.com/shivamlth27/Predicting-Judgment-decisions-using-LLM.git
    cd judgment-llm
    ```
 
