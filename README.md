@@ -98,32 +98,6 @@ By introducing **PredEx**, an expert-annotated dataset tailored to Indian judici
 
 
 ![WhatsApp Image 2024-11-25 at 10 40 34_7348b125](https://github.com/user-attachments/assets/20a57296-71b6-42c6-ac23-0c6cf8b30d03)
-
-### Explainability Example
-
-Below is a sample **attention heatmap** for the case *Maxian And Maxianová v. Slovakia (2014)*:
-
-**Predicted Outcome**: Violation of Article 6 - Right to a Fair Trial  
-![Attention Heatmap](assets/attention_example.png)
-
----
-
-## 📈 **Future Directions**
-
-1. **Domain-Specific LLMs**:
-   - Fine-tune models for other areas like criminal or corporate law.
-   
-2. **Bias Mitigation**:
-   - Implement named-entity anonymization (e.g., masking names, locations).
-   
-3. **Scalability**:
-   - Apply the methodology to other judicial systems globally.
-
-4. **Reinforcement Learning**:
-   - Use **reinforcement learning from human feedback (RLHF)** for improved explanations.
-
----
-
 ## ⚡ **How to Get Started**
 
 ### Prerequisites
@@ -170,24 +144,14 @@ This project was developed as part of **DS504: Natural Language Processing** at 
 - **Ayush Kumar Mishra**
 - **Shivam**
 
-Special thanks to:
-- The **IndianKanoon** team for providing legal case data.
-- Mentors and domain experts for guidance.
-
 ---
 
 ## 📚 **References**
 
 1. Here's how you can include the link to your paper in the README:
 
----
-
-## 📚 **Research Paper**
-
-This project is based on the research detailed in our paper:
-
 1. **[From RoBERTa to aLEXa: Automated Legal Expert Arbitrator for Neural Legal Judgment Prediction](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1224/reports/custom_116826881.pdf)**
 
 2. **[Legal Judgment Reimagined: PredEx and the Rise of Intelligent AI Interpretation in Indian Courts](https://arxiv.org/abs/2406.04136)**  
-   This paper introduces the PredEx dataset and emphasizes the use of explainable AI techniques in the Indian judicial system.
+   
 
