@@ -52,29 +52,20 @@ By introducing **PredEx**, an expert-annotated dataset tailored to Indian judici
 ## 📂 **Repository Structure**
 
 ```plaintext
-├── data/
-│   ├── predex_train.json   # Training dataset (80%)
-│   ├── predex_test.json    # Testing dataset (20%)
-├── models/
-│   ├── fine_tuned_roberta/ # Checkpoints of fine-tuned RoBERTa
-│   ├── fine_tuned_legalbert/ # Legal-BERT model
-├── src/
-│   ├── preprocessing.py    # Data cleaning and preparation
-│   ├── chunking.py         # Code for managing long legal texts
-│   ├── training.py         # Model training script
-│   ├── evaluation.py       # Model evaluation script
-├── notebooks/
-│   ├── eda.ipynb           # Exploratory Data Analysis
-│   ├── explainability.ipynb # Attention visualization
-├── results/
-│   ├── performance_metrics.csv # Detailed model metrics
-│   ├── attention_visualizations/ # Attention score outputs
-├── assets/
-│   ├── model_architecture.png  # Architecture diagram
-│   ├── attention_example.png   # Sample attention visualization
-├── README.md               # Project documentation
-└── requirements.txt        # Dependencies
+├── images/                   # Contains visual assets like architecture diagrams and results
+├── templates/                # Contains HTML templates for the web app (if applicable)
+├── .gitignore                # Files and folders to exclude from Git versioning
+├── README.md                 # Project documentation
+├── app.py                    # Backend API or web application for interfacing with the model
+├── data_prep.ipynb           # Data preprocessing scripts and notebook
+├── inference.py              # Model inference scripts for testing predictions
+├── pretrained_llama.py       # Pre-trained model implementation (LLama architecture)
+├── report.pdf                # Detailed project report
+├── roberta.py                # RoBERTa fine-tuning implementation
+├── roberta_train.py          # Script for training the RoBERTa model
+├── train.ipynb               # Training pipeline notebook
 ```
+
 
 ---
 
