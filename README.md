@@ -148,8 +148,6 @@ This project was developed as part of **DS504: Natural Language Processing** at 
 
 ## 📚 **References**
 
-1. Here's how you can include the link to your paper in the README:
-
 1. **[From RoBERTa to aLEXa: Automated Legal Expert Arbitrator for Neural Legal Judgment Prediction](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1224/reports/custom_116826881.pdf)**
 
 2. **[Legal Judgment Reimagined: PredEx and the Rise of Intelligent AI Interpretation in Indian Courts](https://arxiv.org/abs/2406.04136)**  
