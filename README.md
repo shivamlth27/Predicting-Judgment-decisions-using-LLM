@@ -2,7 +2,6 @@
 
 This repository is part of the **DS504: Natural Language Processing** project by Group 17, which explores leveraging state-of-the-art **Large Language Models (LLMs)** to predict judicial outcomes and provide explainable rationales. The project introduces **PredEx**, the largest annotated dataset of Indian legal judgments, and implements advanced NLP techniques to address critical challenges in the judiciary.
 
----
 
 ## 📝 **Project Summary**
 
